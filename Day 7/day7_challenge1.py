@@ -1,65 +1,12 @@
 import random
 
 
-# Hangman Stages
-stages = ['''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
-# list of words to choose from
-words_list = ["practice", "python", "camel", "baboon", "ghana"]
+# import Hangman Stages
+from hangman_art import stages,logo
+
+# import word list
+from hangman_words import words_list
+
 
 # number of words in list 
 word_list_number = len(words_list)
@@ -83,10 +30,11 @@ word = []
 # listing spaces with loops
 for letter in selected_word:
     word += '_'
-print(word)
+print(f'word\n')
 
 # welcoming front
-print('Welcome to Hangman')
+print(logo)
+print('Welcome to Hangman\n')
 
 end_of_game = False
 # loop for continuous game till game over 
@@ -94,6 +42,9 @@ while not end_of_game:
     # asking user for letter guess to start the game
     guess = input("Guess a letter:\n").lower()
 
+    # multiple word check 
+    if guess in word:
+        print("You already guessed {guess}")
     #loop check
     for position in range(word_length):
         letter = selected_word[position]
@@ -102,16 +53,25 @@ while not end_of_game:
         
     if guess not in selected_word:
         lives -= 1
+        print(f"{guess} is not in the word, you lose a life")
         if lives == 0:
             end_of_game = True
-            
-            print("Gameover, You got hanged.")
+            print('')
+            print(f'the word was {selected_word}\n')
+            print("You got hanged.")
             print("You lose!!!")
+            print("Gameover")
+            
+            
         else:
             print(stages[lives])
-    print(word)
+    print(f'{word}\n')
 
     if '_' not in word:
         end_of_game = True
+        print("congratrulations")
         print("You Win")
 print(stages[lives])
+
+
+
