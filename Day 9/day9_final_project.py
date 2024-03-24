@@ -23,7 +23,6 @@ def make_bid(name,bid):
 
 should_continue = True
 while should_continue:
-
     highest_bid = 0
     highest_bidder = None
     for bid in bid_list:
