@@ -57,6 +57,11 @@ while should_continue:
             new_card = draw()
             computer_cards.append(new_card)
 
+        
+        # final cards
+        print(f"Your final cards are {player_cards}")
+        print(f"Computer's final cards are {computer_cards}")
+        
         # Determine the winner
         if sum(player_cards) > 21:
             print("You lose")
