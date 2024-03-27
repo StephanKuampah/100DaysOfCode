@@ -12,17 +12,27 @@ def clear_terminal():
 cards = [11,2,3,4,5,6,7,8,9,10,10,10,10]
 
 
-# start card 1 
-start_card1 = cards[random.choice(cards)]
 
-# start card 2
-start_card2 = cards[random.choice(cards)]
+def draw2():
+    # start card 1 
+    start_card1 = cards[random.choice(cards)]
 
-# selected start up cards
-card = [start_card1,start_card2]
+    # start card 2
+    start_card2 = cards[random.choice(cards)]
+    
+    return [start_card1,start_card2]
 
-# printing 2 start up cards
-print(card)
+def draw():
+    draw = cards[random.choice(cards)]
+    return draw
 
-# function for drawing cards
-# def draw():
+# selected your start up cards
+your_card = draw2()
+
+# computer card
+card = draw2()
+
+
+# printing your start up cards
+print(f"Your cards: {your_card}")
+print(f"computer's first card is {card[0]}")
