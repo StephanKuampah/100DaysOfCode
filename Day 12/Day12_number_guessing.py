@@ -40,7 +40,7 @@ if difficulty == 'easy':
                 print(f"You have {attempts} attempts remaining to guess a number")
             else:
                 should_continue = False
-                print('You lose')
+                print("You've run out of guesses, you lose")
         else:
             should_continue = False
             print(f"You got it! The answer is {answer}.")
@@ -62,7 +62,7 @@ else:
                 print(f"You have {attempts} attempts remaining to guess a number")
             else:
                 should_continue = False
-                print('You lose')
+                print("You've run out of guesses, you lose")
         else:
             should_continue = False
             print(f"You got it! The answer is {answer}.")
