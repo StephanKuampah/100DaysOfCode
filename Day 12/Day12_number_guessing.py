@@ -17,17 +17,52 @@ numbers = [
 chosen_number = random.choice(numbers)
 
 
-
-
-
-
 print('Welcome to the number guessing game.')
 difficulty = input("I am thinking of a number between 1 and 100.\nChoose a difficulty. Type 'easy' or 'hard':\n")
+print(chosen_number)
 
-easy = 10
-hard = 5
+
+attempts = ''
 if difficulty == 'easy':
-    print(f"You have {easy} attempts remaining to guess a number")
+    attempts = 10
+    print(f"You have {attempts} attempts remaining to guess a number")
+    should_continue = True
+    while should_continue:
+        answer =  int(input("Make a guess:\n"))
+        if answer != chosen_number:
+            attempts-= 1
+            if attempts > 0:
+                if answer > chosen_number:
+                    print('Too High')
+                else:
+                    print('Too Low')
+                print('Guess Again')
+                print(f"You have {attempts} attempts remaining to guess a number")
+            else:
+                should_continue = False
+                print('You lose')
+        else:
+            should_continue = False
+            print(f"You got it! The answer is {answer}.")
 
 else:
-    print(f"You have {hard} attempts remaining to guess a number")
+    attempts = 5
+    print(f"You have {attempts} attempts remaining to guess a number")
+    should_continue = True
+    while should_continue:
+        answer =  int(input("Make a guess:\n"))
+        if answer != chosen_number:
+            attempts-= 1
+            if attempts > 0:
+                if answer > chosen_number:
+                    print('Too High')
+                else:
+                    print('Too Low')
+                print('Guess Again')
+                print(f"You have {attempts} attempts remaining to guess a number")
+            else:
+                should_continue = False
+                print('You lose')
+        else:
+            should_continue = False
+            print(f"You got it! The answer is {answer}.")
