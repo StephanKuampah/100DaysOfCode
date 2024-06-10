@@ -19,12 +19,19 @@ print(logo)
 choice1 = random.choice(data)
 
 
+ 
+
+
 should_continue = True
 current_score = 0
 while should_continue:
-    
+
     choice2 = random.choice(data)
-    new = print(f"Compare A: {selected(choice1)}")
+
+    if choice1 == choice2:
+        choice2 = random.choice(data)
+
+    print(f"Compare A: {selected(choice1)}")
     print(vs)
     print(f"Against B: {selected(choice2)}")
     answer = input("Who has more followers? Type 'A' or 'B':\n").lower()
@@ -37,7 +44,7 @@ while should_continue:
 
     life = 1
 
-    if life > 0:
+    if life != 0:
         
         if answer == 'a':
             if followers > followers2:
@@ -47,16 +54,16 @@ while should_continue:
                 life = 0
                 print(f"Sorry, you're wrong. Your final score is {current_score}")
                 
-        else:
+        elif answer == 'b':
             if followers2 > followers:
                 current_score += 1 
                 print(f"You're right, your current score is {current_score}")
             else:
                 life = 0
                 print(f"Sorry, you're wrong. Your final score is {current_score}")
-    choice1 = choice2
-        
                 
+        if should_continue:
+            choice1 = choice2               
     if life == 0:
         print('Gameover')
         should_continue = False
