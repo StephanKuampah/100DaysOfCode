@@ -25,70 +25,68 @@ MENU = {
     }
 }
 
+money = 0
+
 resources = {
     "water": 300,
     "milk": 200,
     "coffee": 100,
 }
 
-def money(quarter, dime,nickel,penny):
-    quarters = 0.25 * quarter
-    dimes = 0.1 * dime
-    nickels = 0.05 * nickel
-    pennies = 0.01 * penny
-    total = quarters + dimes + nickels + pennies
+def pay():
+    total = 0
+    print("Please insert coins.")
+    total += int(input("How many quarters?: ")) * 0.25 
+    total+= int(input("How many dimes?: ")) * 0.1
+    total += int(input("How many nickels?: "))* 0.05 
+    total += int(input("How many pennies?: ")) * 0.01
     return total
 
-def change(cost,paid):
-    change = paid - cost
-    return(change)
+def change(cost, paid):
+    if paid >= cost:
+        change = round(paid - cost,2)
+        global money
+        money += change
+        print(f"Here is ${change} in change")
+        return True  
+    else:
+        print("Sorry, the money is not enough.")
+        return False
 
-def ingredient_tracking():
-    money = 0
-    water = resources['water'] - MENU[f"{choice}"]["ingredients"]["water"]
-    milk = resources['milk'] - MENU[f"{choice}"]["ingredients"]["milk"]
-    coffee = resources['coffee'] - MENU[f"{choice}"]["ingredients"]["coffee"]
-    money += cost
-    print(f"Water: {water}ml")
-    print(f"Milk: {milk}ml")
-    print(f"Coffee: {coffee}g")
-    print(f"Money: ${cost}")
+    
+def check(selected):
+    for item in selected:
+        if selected[item] >= resources[item]:
+            print   (f"Sorry there isn't enough {item}")
+            return False
+        return True
 
-# def ingredient_tracking():
-#     money = 0
-#     a = MENU[f"{choice}"]["ingredients"]["water"]
-#     b = MENU[f"{choice}"]["ingredients"]["milk"]
-#     c = MENU[f"{choice}"]["ingredients"]["coffee"]
-#     if a != "" and b != "" and c != "" and cost != "":
-#         water = resources['water'] - a
-#         milk = resources['milk'] - b
-#         coffee = resources['coffee'] - c
-#         money += cost
-#     else:
-#         water = resources['water'] - 0
-#         milk = resources['milk'] - 0
-#         coffee = resources['coffee'] - 0
-#         money
-#     print(f"Water: {water}ml")
-#     print(f"Milk: {milk}ml")
-#     print(f"Coffee: {coffee}g")
-#     print(f"Money: ${cost}")
+def coffee(choice,selected):
+    for item in selected:
+        resources[item] -= selected[item]
+    print(f"Here is your {choice}, Enjoy!")
 
-
-
-# ingredient_tracking()
 
 
 should_continue = True
 while should_continue:
-    choice = input("What would you like? (espresso/latte/cappucino)\n")
-    cost = MENU[f"{choice}"]['cost']
-    print("Please insert coins.")
-    quarter = float(input("How many quarters?: "))
-    dime = float(input("How many dimes?: "))
-    nickel = float(input("How many nickels?: "))
-    penny = float(input("How many pennies?: "))
-    money_total = round(money(quarter,dime,nickel,penny),2)
-    change = change(cost,money_total)
-    print(f"Here is ${change} in change")
-    print(f"Here is your {choice}, Enjoy!")
+    choice = input("What would you like? (espresso/latte/cappuccino)\n")
+   
+    if choice == "off":
+        should_continue = False
+    elif choice == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        print(f"Money: ${money}")
+    else:
+        selected_drink = MENU[choice]
+        if check(selected_drink["ingredients"]):
+            paid = pay()
+            if change(selected_drink['cost'],paid):
+                coffee(choice,selected_drink["ingredients"])
+        
+
+
+        
+        
