@@ -1,6 +1,7 @@
 from turtle import *
 import time
 from snake_mod import Snake
+from food import Food
 
 
 screen = Screen()
@@ -15,6 +16,7 @@ start = screen.textinput(title= "Welcome to snake", prompt="Do you want to start
 
 
 snake = Snake()
+food = Food()
 
 
 
@@ -36,6 +38,9 @@ while game_on:
     time.sleep(.1)
     snake.move()
         
+    
+    if snake.snake[0].distance(food) < 15:
+        food.refresh()
         
 
 
