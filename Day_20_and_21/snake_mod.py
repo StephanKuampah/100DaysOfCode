@@ -10,36 +10,46 @@ RIGHT = 0
 class Snake:
     
     def __init__(self):
-        self.snake = []
+        self.parts = []
         self.create_snake()
 
     def create_snake(self):
         for position in STARTING_POSITIONS:
-            snake_parts = Turtle("square")
-            snake_parts.color("white")
-            snake_parts.penup()
-            snake_parts.goto(position)
-            self.snake.append(snake_parts)
+            self.add(position)
     
+
+    def add(self,position):
+        snake_parts = Turtle("square")
+        snake_parts.color("white")
+        snake_parts.penup()
+        snake_parts.goto(position)
+        self.parts.append(snake_parts)
+    
+    def extend(self):
+        self.add(self.parts[-1].position())
+
+
+
     def move(self):
-        for part in range(len(self.snake)-1, 0, -1):
-            new_x = self.snake[part-1].xcor()
-            new_y = self.snake[part-1].ycor()
-            self.snake[part].goto(new_x, new_y)
-        self.snake[0].forward(20)
+        for part in range(len(self.parts)-1, 0, -1):
+            new_x = self.parts[part-1].xcor()
+            new_y = self.parts[part-1].ycor()
+            self.parts[part].goto(new_x, new_y)
+        self.parts[0].forward(20)
     
     def up(self):
-        if self.snake[0].heading() != DOWN:
-            self.snake[0].setheading(UP)
+        if self.parts[0].heading() != DOWN:
+            self.parts[0].setheading(UP)
 
     def down(self):
-        if self.snake[0].heading() != UP:
-            self.snake[0].setheading(DOWN)
+        if self.parts[0].heading() != UP:
+            self.parts[0].setheading(DOWN)
 
     def left(self):
-        if self.snake[0].heading() != RIGHT:
-            self.snake[0].setheading(LEFT)
+        if self.parts[0].heading() != RIGHT:
+            self.parts[0].setheading(LEFT)
 
     def right(self):
-        if self.snake[0].heading() != LEFT:
-            self.snake[0].setheading(RIGHT)
+        if self.parts[0].heading() != LEFT:
+            self.parts[0].setheading(RIGHT)
+
