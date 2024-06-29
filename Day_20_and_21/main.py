@@ -1,6 +1,8 @@
 from turtle import *
 import time
 from snake_mod import Snake
+from food import Food
+from scoreboard import Scoreboard
 
 
 screen = Screen()
@@ -15,7 +17,8 @@ start = screen.textinput(title= "Welcome to snake", prompt="Do you want to start
 
 
 snake = Snake()
-
+food = Food()
+scoreboard = Scoreboard()
 
 
 
@@ -35,8 +38,23 @@ while game_on:
     screen.update()
     time.sleep(.1)
     snake.move()
-        
-        
+    if snake.parts[0].distance(food) < 15:
+        food.refresh()
+        snake.extend()
+        scoreboard.increase()
+    
+    if (snake.parts[0].xcor() < -280) or (snake.parts[0].xcor() > 280) or (snake.parts[0].ycor() < -280) or (snake.parts[0].ycor() > 280):
+            game_on = False
+            scoreboard.game_over()   
+
+           
+            
+    for parts in snake.parts[1:]:
+         if snake.parts[0].distance(parts) < 10 :
+              game_on = False
+              scoreboard.game_over()
+
+
 
 
 
