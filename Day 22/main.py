@@ -14,8 +14,8 @@ screen.listen()
 
 
 
-bat1 = Bat((350,0))
-bat2 = Bat((-350,0))
+bat1 = Bat((340,0))
+bat2 = Bat((-340,0))
 ball = Ball()
 scoreboard1 = Scoreboard((100,275))
 scoreboard2 = Scoreboard((-100,275))
@@ -44,22 +44,22 @@ game_on = True
 
 while game_on:
     screen.update()
-    ball.moveup()
+    ball.move()
     time.sleep(0.1)
     
 
     if ball.ycor() > 280 or ball.ycor() < -280:
         ball.bounce()
 
-    if (ball.distance(bat1) < 50 and ball.xcor() > 320) or (ball.distance(bat2) < 50 and ball.xcor() < -320) :
+    if (ball.distance(bat1) < 40 and ball.xcor() > 320) or (ball.distance(bat2) < 40 and ball.xcor() < -320) :
         ball.bounce2()
 
 
-    if ball.xcor() > 360:
+    if ball.xcor() > 350:
         ball.refresh()
         scoreboard2.increase()
         
-    if ball.xcor() < -360:
+    if ball.xcor() < -350:
         ball.refresh()
         scoreboard1.increase()
     
