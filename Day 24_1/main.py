@@ -22,7 +22,7 @@ for name in Names:
 
 paths = []
 for name in Names:
-    letter_path = f"B:\python study\Day 24_1\Output\ReadyToSend\letter_to_{name}"
+    letter_path = f"B:\python study\Day 24_1\Output\ReadyToSend\letter_to_{name}.docx"
     paths.append(letter_path)
 
 
