@@ -36,10 +36,18 @@ while is_on:
         mentioned.append(answer_state)
     elif (answer_state in mentioned):
         print("you already mentioned this state")
-    else:
+    
+    elif answer_state == "Exit":
+        is_on = False
+        for state in states:
+            if state in mentioned:
+                states.remove(state)
+        new_states = pandas.DataFrame(states)
+        new_states.to_csv("states_to_learn.csv")
+            
+    else :
         print("State not valid")
 
-    
     if score == 50:
         is_on = False
         print("contgratulations you mentioned all 50 states")
@@ -50,10 +58,3 @@ while is_on:
 
 
 
-
-
-
-
-
-
-screen.exitonclick()
