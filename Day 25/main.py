@@ -39,9 +39,7 @@ while is_on:
     
     elif answer_state == "Exit":
         is_on = False
-        for state in states:
-            if state in mentioned:
-                states.remove(state)
+        new_states = [states.remove(state) for state in states if state in mentioned]
         new_states = pandas.DataFrame(states)
         new_states.to_csv("states_to_learn.csv")
             
